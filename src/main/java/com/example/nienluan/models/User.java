@@ -31,7 +31,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_User")
-    private long id;
+    private int id;
 
     @Column(name = "name")
     private String name;
@@ -59,6 +59,8 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<Order> orders;
+
+    private String address;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name ="User_Role", joinColumns = @JoinColumn(name="id_User"), inverseJoinColumns = @JoinColumn(name="ID_Role"))

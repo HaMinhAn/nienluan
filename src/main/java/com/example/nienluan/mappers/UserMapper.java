@@ -16,11 +16,10 @@ public class UserMapper {
             .id(user.getId())
             .name(user.getName())
             .password(user.getPassword())
+            .address(user.getAddress())
             .build();
     return userDto;
   }
-
-  ;
 
   public User registerToUser(RegisterDto signUpDto) {
     User user = new User();
@@ -29,9 +28,7 @@ public class UserMapper {
     user.setUsername(signUpDto.getUsername());
     user.setPhoneNumber(signUpDto.getPhoneNumber());
     user.setSex(signUpDto.getSex());
+    user.setAddress(signUpDto.getAddress());
     return user;
   }
-
-  ;
-
 }

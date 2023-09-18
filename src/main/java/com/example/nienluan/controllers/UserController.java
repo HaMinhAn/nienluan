@@ -7,6 +7,8 @@ import com.example.nienluan.dto.UserDto;
 import com.example.nienluan.services.UserServices;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +22,12 @@ public class UserController {
 
   private final UserServices userService;
   private final UserAuthProvider userAuthProvider;
+
+  @GetMapping("{id}")
+  public ResponseEntity<UserDto> getInfor(@PathVariable int id){
+    return ResponseEntity.ok(userService.getEmail(id));
+  }
+
   @PostMapping("/login")
   public ResponseEntity<UserDto> login(@RequestBody CredentialsDto credentialsDto){
 

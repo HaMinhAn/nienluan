@@ -5,14 +5,18 @@ import com.example.nienluan.dto.RegisterDto;
 import com.example.nienluan.dto.UserDto;
 import com.example.nienluan.exceptions.AppException;
 import com.example.nienluan.mappers.UserMapper;
+import com.example.nienluan.models.Role;
 import com.example.nienluan.models.User;
+import com.example.nienluan.repository.RoleRepository;
 import com.example.nienluan.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.nio.CharBuffer;
+import java.util.Arrays;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -21,9 +25,10 @@ public class UserServices {
   private final UserRepository userRepository;
   private final UserMapper userMapper;
   private final PasswordEncoder passwordEncoder;
+  private final RoleRepository roleRepository;
 
   public UserDto findByUsername(String username) {
-    User user = userRepository.findByUsername(username).orElseThrow(() -> new AppException("Unknoew user", HttpStatus.NOT_FOUND));
+    User user = userRepository.findByUsername(username).orElseThrow(() -> new AppException("Unknown user", HttpStatus.NOT_FOUND));
 
     return userMapper.toUserDto(user);
   }
@@ -43,11 +48,21 @@ public class UserServices {
   if (userOptional.isPresent()){
     throw new AppException("User is existed", HttpStatus.BAD_REQUEST);
   }
+    Optional<Role> userRole = roleRepository.findById(2L);
     User user = userMapper.registerToUser(registerDto);
     user.setPassword(passwordEncoder.encode(CharBuffer.wrap(registerDto.getPassword())));
-
+    user.setRoles(Arrays.asList(userRole.get()));
     User userSave = userRepository.save(user);
 
     return userMapper.toUserDto(userSave);
+  }
+
+  public UserDto getEmail(int id) {
+    Optional<User> userOptional = userRepository.findById(id);
+    if (userOptional == null && userOptional.isEmpty()){
+      throw new AppException("User not exist", HttpStatus.BAD_REQUEST);
+    }
+    return userMapper.toUserDto(userOptional.get());
+
   }
 }
