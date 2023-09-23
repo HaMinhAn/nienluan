@@ -31,7 +31,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_User")
-    private int id;
+    private Integer id;
 
     @Column(name = "name")
     private String name;
@@ -66,8 +66,6 @@ public class User {
     @JoinTable(name ="User_Role", joinColumns = @JoinColumn(name="id_User"), inverseJoinColumns = @JoinColumn(name="ID_Role"))
     private List<Role> roles = new ArrayList<>();
 
-    @OneToOne(mappedBy = "user")
-    private InformationAccount informationAccount;
 
   // getters và setters
 }

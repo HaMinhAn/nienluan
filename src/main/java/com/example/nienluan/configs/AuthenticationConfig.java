@@ -29,6 +29,8 @@ public class AuthenticationConfig {
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
             .authorizeHttpRequests((request) -> request.antMatchers(HttpMethod.POST, "/login", "/register").permitAll()
+
+                    .antMatchers(HttpMethod.GET, "/phone", "/v1/roles/{id}").permitAll()
                     .anyRequest().authenticated());
     return http.build();
 

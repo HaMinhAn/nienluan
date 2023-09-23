@@ -22,7 +22,7 @@ public class Cart {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name="id_Cart")
-  private Long id;
+  private Integer id;
 
   @OneToOne
   @JoinColumn(name = "id_User")

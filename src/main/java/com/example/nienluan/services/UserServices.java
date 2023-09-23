@@ -3,6 +3,7 @@ package com.example.nienluan.services;
 import com.example.nienluan.dto.CredentialsDto;
 import com.example.nienluan.dto.RegisterDto;
 import com.example.nienluan.dto.UserDto;
+import com.example.nienluan.dto.UserResponse;
 import com.example.nienluan.exceptions.AppException;
 import com.example.nienluan.mappers.UserMapper;
 import com.example.nienluan.models.Role;
@@ -48,7 +49,7 @@ public class UserServices {
   if (userOptional.isPresent()){
     throw new AppException("User is existed", HttpStatus.BAD_REQUEST);
   }
-    Optional<Role> userRole = roleRepository.findById(2L);
+    Optional<Role> userRole = roleRepository.findById(2);
     User user = userMapper.registerToUser(registerDto);
     user.setPassword(passwordEncoder.encode(CharBuffer.wrap(registerDto.getPassword())));
     user.setRoles(Arrays.asList(userRole.get()));
@@ -64,5 +65,19 @@ public class UserServices {
     }
     return userMapper.toUserDto(userOptional.get());
 
+  }
+
+  public UserResponse getUserInfor(int id) {
+    Optional<User> user = userRepository.findById(id);
+    if(user.isEmpty()){
+      throw new AppException("Khong the tim thong tin nguoi dung", HttpStatus.NOT_FOUND);
+    }
+    UserResponse userResponse = UserResponse.builder()
+            .name(user.get().getName())
+            .age(user.get().getAge())
+            .DOB(user.get().getDOB())
+            .sex(user.get().getSex())
+            .build();
+    return userResponse;
   }
 }

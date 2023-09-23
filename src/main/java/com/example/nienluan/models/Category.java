@@ -1,6 +1,8 @@
 package com.example.nienluan.models;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,11 +14,13 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "category")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Category {
   @Id
-  @GeneratedValue(strategy = GenerationType.SEQUENCE)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id_Category", nullable = false)
-  private Long id;
+  private Integer id;
 
   @Column(name = "name")
   private String name;

@@ -29,6 +29,8 @@ public class UserMapper {
     user.setPhoneNumber(signUpDto.getPhoneNumber());
     user.setSex(signUpDto.getSex());
     user.setAddress(signUpDto.getAddress());
+    user.setName(signUpDto.getName());
+    user.setAddress(signUpDto.getAddress());
     return user;
   }
 }

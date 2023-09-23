@@ -9,11 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Builder
-public class UserDto {
+public class PhoneResponse {
   private Integer id;
   private String name;
-  private String username;
-  private String password;
-  private String token;
-  private String address;
 }

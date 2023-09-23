@@ -6,7 +6,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-@Repository
-public interface PictureRepository extends JpaRepository<Picture,Long> {
+import java.util.Optional;
 
+@Repository
+public interface PictureRepository extends JpaRepository<Picture,Integer> {
+
+  Optional<Picture> findByCaption(String caption);
 }

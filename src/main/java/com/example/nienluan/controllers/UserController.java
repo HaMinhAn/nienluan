@@ -4,6 +4,7 @@ import com.example.nienluan.configs.UserAuthProvider;
 import com.example.nienluan.dto.CredentialsDto;
 import com.example.nienluan.dto.RegisterDto;
 import com.example.nienluan.dto.UserDto;
+import com.example.nienluan.dto.UserResponse;
 import com.example.nienluan.services.UserServices;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -45,4 +46,9 @@ public class UserController {
           .body(user);
   }
 
+  @GetMapping("/all/{id}")
+  public ResponseEntity<UserResponse> getPrivateInfor(@PathVariable int id){
+    UserResponse userResponse = userService.getUserInfor(id);
+    return ResponseEntity.ok(userResponse);
+  }
 }
