@@ -9,12 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Builder
-public class RegisterDto {
-  private String username;
-  private String password;
+public class PhoneResponse {
+  private Integer id;
   private String name;
-  private String phoneNumber;
-  private Boolean sex;
-  private int age;
-  private String address;
 }

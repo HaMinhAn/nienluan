@@ -25,7 +25,7 @@ public class OrderDetail {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id_order_detail")
-  private long id;
+  private Integer id;
   @Column(name="quantity")
   private int quantity;
   @Column(name="totalPrice")
