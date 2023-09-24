@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.net.URI;
 
 @RestController
@@ -35,5 +36,13 @@ public class PhoneController {
     PhoneResponse phoneResponse = phoneService.addPhone(phoneRequest);
 
     return ResponseEntity.created(URI.create("/phone" + phoneResponse.getId())).body(phoneResponse);
+  }
+
+  @GetMapping("/manufacturer")
+  public ResponseEntity<Page<Phone>> getListPhoneByManufacturer(@RequestParam Integer id
+          , @RequestParam(defaultValue = "0") int page
+          , @RequestParam(defaultValue = "10") int size){
+    Page<Phone> phones = phoneService.getListPhoneByManufacturer( id,  page,  size);
+  return ResponseEntity.ok(phones);
   }
 }

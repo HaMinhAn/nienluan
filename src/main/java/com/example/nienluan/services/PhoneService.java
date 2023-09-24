@@ -8,4 +8,6 @@ import org.springframework.data.domain.Page;
 public interface PhoneService {
   Page<Phone> getPhones(int page, int size);
   PhoneResponse addPhone(PhoneRequest phoneRequest);
+
+  Page<Phone> getListPhoneByManufacturer(Integer id, int page, int size);
 }
