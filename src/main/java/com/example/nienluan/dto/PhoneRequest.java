@@ -19,6 +19,7 @@ public class PhoneRequest {
 
   private double size;
 
+  private int quantity;
   private List<CreatePicture> picture;
 
   private Integer manufacturer;

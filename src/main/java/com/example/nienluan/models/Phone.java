@@ -48,6 +48,9 @@ public class Phone {
   @Column(name = "size")
   private double size;
 
+  @Column(name = "quantity")
+  private int quantity;
+
   @Column(name = "description", columnDefinition = "nvarchar(max)")
   private String description;
   @ManyToOne( fetch = FetchType.EAGER, cascade = CascadeType.ALL)

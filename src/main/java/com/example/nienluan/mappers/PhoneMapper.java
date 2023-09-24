@@ -17,6 +17,7 @@ public class PhoneMapper {
             .ram(phoneRequest.getRam())
             .rom(phoneRequest.getRom())
             .size(phoneRequest.getSize())
+            .quantity(phoneRequest.getQuantity())
             .description(phoneRequest.getDescription())
             .build();
     return phone;
