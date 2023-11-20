@@ -2,25 +2,25 @@ package com.example.nienluan.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 import java.util.List;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+import lombok.ToString;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -42,6 +42,8 @@ public class Phone {
   @Column(name = "ram")
   private int ram;
 
+  @Column(name = "pin")
+  private int pin;
   @Column(name = "rom")
   private int rom;
 
@@ -53,12 +55,13 @@ public class Phone {
 
   @Column(name = "description", columnDefinition = "nvarchar(max)")
   private String description;
-  @ManyToOne( fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+  @ManyToOne
   @JoinColumn(name = "id_Manufacturer")
+  @ToString.Exclude
   @JsonBackReference
   private Manufacturer manufacturer;
 
-  @OneToMany(mappedBy = "phone_id",fetch = FetchType.LAZY)
+  @OneToMany(mappedBy = "phone",fetch = FetchType.LAZY)
   @JsonManagedReference
   private List<Picture> pictures;
 

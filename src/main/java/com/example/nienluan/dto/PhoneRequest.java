@@ -18,7 +18,7 @@ public class PhoneRequest {
   private int rom;
 
   private double size;
-
+  private int pin;
   private int quantity;
   private List<CreatePicture> picture;
 

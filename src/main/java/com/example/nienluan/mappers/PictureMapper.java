@@ -11,7 +11,7 @@ public class PictureMapper {
     return Picture.builder()
             .caption(picture.getCaption())
             .imagePath(picture.getPath())
-            .phone_id(phone)
+            .phone(phone)
             .build();
   }
 }

@@ -10,4 +10,6 @@ public interface PhoneService {
   PhoneResponse addPhone(PhoneRequest phoneRequest);
 
   Page<Phone> getListPhoneByManufacturer(Integer id, int page, int size);
+  public void deletePhone(int id);
+  Phone getPhone(int id);
 }

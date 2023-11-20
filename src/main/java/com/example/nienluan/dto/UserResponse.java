@@ -1,9 +1,9 @@
 package com.example.nienluan.dto;
 
+import jakarta.persistence.Column;
 import lombok.Builder;
 import lombok.Data;
 
-import javax.persistence.Column;
 
 @Data
 @Builder

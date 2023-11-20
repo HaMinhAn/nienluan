@@ -19,6 +19,7 @@ public class PhoneMapper {
             .size(phoneRequest.getSize())
             .quantity(phoneRequest.getQuantity())
             .description(phoneRequest.getDescription())
+            .pin(phoneRequest.getPin())
             .build();
     return phone;
   }

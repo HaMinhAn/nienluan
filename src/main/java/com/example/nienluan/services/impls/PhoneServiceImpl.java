@@ -96,4 +96,34 @@ public class PhoneServiceImpl implements PhoneService {
 
     return phones;
   }
+
+  @Override
+  public Phone getPhone(int id) {
+    Optional<Phone> phone = phoneRepository.findById(id);
+    if(phone.isEmpty()){
+      throw new AppException("Phone is not exist", HttpStatus.NOT_FOUND);
+    }
+    return phone.get();
+  }
+
+  public void deletePhone(int id) {
+    Optional<Phone> optionalPhone = phoneRepository.findById(id);
+    Phone phone = optionalPhone.get();
+
+    List<Picture> pictures = pictureRepository.findAllByPhone(phone);
+    if (pictures != null && !pictures.isEmpty()) {
+      for (Picture pic : pictures) {
+        pictureRepository.delete(pic);
+      }
+    }
+    phone.setManufacturer(null);
+    phone.setCategory(null);
+
+    phoneRepository.save(phone);
+    phoneRepository.delete(phone);
+  }
+
+  public List<Phone> getAllPhones() {
+    return phoneRepository.findAll();
+  }
 }

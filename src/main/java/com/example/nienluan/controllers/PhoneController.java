@@ -3,11 +3,15 @@ package com.example.nienluan.controllers;
 import com.example.nienluan.dto.PhoneRequest;
 import com.example.nienluan.dto.PhoneResponse;
 import com.example.nienluan.models.Phone;
+import com.example.nienluan.repository.CategoryRepository;
+import com.example.nienluan.repository.ManufacturerRepository;
 import com.example.nienluan.services.impls.PhoneServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +34,17 @@ public class PhoneController {
     return ResponseEntity.ok(phoneService.getPhones(page,size));
   }
 
+  @GetMapping("/all")
+  public ResponseEntity<List<Phone>> getAllPhones(){
+
+    return ResponseEntity.ok(phoneService.getAllPhones());
+  }
+  @GetMapping("/{id}")
+  public ResponseEntity<Phone> getPhone(@PathVariable int id){
+
+    return ResponseEntity.ok(phoneService.getPhone(id));
+  }
+
   @PostMapping()
   public  ResponseEntity<PhoneResponse> addPhone(@RequestBody PhoneRequest phoneRequest ){
     System.out.println(phoneRequest.getDescription());
@@ -37,11 +52,15 @@ public class PhoneController {
 
     return ResponseEntity.created(URI.create("/phone" + phoneResponse.getId())).body(phoneResponse);
   }
-
+ @DeleteMapping("/{id}")
+ public  void deletePhone(@PathVariable int id){
+     phoneService.deletePhone(id);
+ }
   @GetMapping("/manufacturer")
-  public ResponseEntity<Page<Phone>> getListPhoneByManufacturer(@RequestParam Integer id
+  public ResponseEntity<Page<Phone>> getListPhoneByManufacturer(@RequestParam int id
           , @RequestParam(defaultValue = "0") int page
           , @RequestParam(defaultValue = "10") int size){
+
     Page<Phone> phones = phoneService.getListPhoneByManufacturer( id,  page,  size);
   return ResponseEntity.ok(phones);
   }
