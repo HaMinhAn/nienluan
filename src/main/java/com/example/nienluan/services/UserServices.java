@@ -2,6 +2,7 @@ package com.example.nienluan.services;
 
 import com.example.nienluan.dto.CredentialsDto;
 import com.example.nienluan.dto.RegisterDto;
+import com.example.nienluan.dto.UpdateUserRequest;
 import com.example.nienluan.dto.UserDto;
 import com.example.nienluan.dto.UserResponse;
 import com.example.nienluan.exceptions.AppException;
@@ -77,7 +78,32 @@ public class UserServices {
             .age(user.get().getAge())
             .DOB(user.get().getDOB())
             .sex(user.get().getSex())
+            .phoneNumber(user.get().getPhoneNumber())
+            .address(user.get().getAddress())
             .build();
     return userResponse;
+  }
+
+  public void updateUser(int id, UpdateUserRequest updateUserRequest) {
+    Optional<User> optionalUser = userRepository.findById(id);
+    System.out.println(updateUserRequest);
+    if(optionalUser.isEmpty()){
+      throw new AppException("Khong the tim thong tin nguoi dung", HttpStatus.NOT_FOUND);
+    }
+    User user = optionalUser.get();
+    if(!updateUserRequest.getName().equals(user.getName())){
+      user.setName(updateUserRequest.getName());
+    }
+    if(!updateUserRequest.getAddress().equals(user.getAddress())){
+      user.setAddress(updateUserRequest.getAddress());
+    }
+    if(updateUserRequest.getAge() != (user.getAge())){
+      user.setAge(updateUserRequest.getAge());
+    }
+    if(updateUserRequest.getPhoneNumber() != (user.getPhoneNumber())){
+      user.setPhoneNumber(updateUserRequest.getPhoneNumber());
+    }
+    userRepository.save(user);
+    System.out.println("Cập nhật thông tin thành công");
   }
 }

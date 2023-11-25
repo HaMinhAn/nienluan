@@ -16,6 +16,8 @@ public class UserResponse {
 
   @Column(name = "Sex")
   private Boolean sex;
+  private String phoneNumber;
+  private String address;
 
   @Column(name = "Year_Of_Birth")
   private int DOB;

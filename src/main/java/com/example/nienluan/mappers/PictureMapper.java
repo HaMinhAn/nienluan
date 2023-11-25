@@ -10,7 +10,7 @@ public class PictureMapper {
   public Picture toPicture(CreatePicture picture, Phone phone){
     return Picture.builder()
             .caption(picture.getCaption())
-            .imagePath(picture.getPath())
+            .imagePath(picture.getImagePath())
             .phone(phone)
             .build();
   }

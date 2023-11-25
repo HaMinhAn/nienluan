@@ -17,7 +17,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
@@ -114,7 +118,24 @@ private UserRepository userRepository;
     }
     orderRepository.delete(orderOptional.get());
   }
+  public Map<String, BigDecimal> getOrdersOrderByCreateDate() {
+    Map<String, BigDecimal> revenueByMonth = new HashMap<>();
+    List<Order> allOrders = orderRepository.findAllByStatusAndIsPaid(OrderStatus.RECEIVED, true);
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSS");
 
+    for (Order order : allOrders) {
+      // Chuyển đổi LocalDateTime thành String sử dụng DateTimeFormatter
+      String orderDateString = order.getCreatedDate().format(formatter);
+
+      // Parse String thành LocalDateTime
+      LocalDateTime orderDate = LocalDateTime.parse(orderDateString, formatter);
+
+      // Tiếp tục xử lý như trước
+      String monthYear = orderDate.getMonth().toString() + " " + orderDate.getYear();
+      revenueByMonth.merge(monthYear, new BigDecimal(order.getTotalPrice()), BigDecimal::add);
+    }
+    return revenueByMonth;
+  }
   public void updateStatusOrder(int id, int value) {
     Optional<Order> orderOptional = orderRepository.findById(id);
 

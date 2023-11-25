@@ -1,18 +1,15 @@
 package com.example.nienluan.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
-@Builder
-public class UserDto {
-  private Integer id;
+public class UpdateUserRequest {
   private String name;
-  private String username;
-  private String token;
+  private String phoneNumber;
+  private int age;
   private String address;
 }

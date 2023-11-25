@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 @Data
 public class CreatePicture {
   private String caption;
-  private String path;
+  private String imagePath;
 }

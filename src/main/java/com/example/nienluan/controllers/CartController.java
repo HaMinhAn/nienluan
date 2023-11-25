@@ -2,7 +2,7 @@ package com.example.nienluan.controllers;
 
 import com.example.nienluan.dto.AddItems;
 import com.example.nienluan.models.Cart;
-import com.example.nienluan.services.BasketService;
+import com.example.nienluan.services.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,28 +21,28 @@ import java.util.concurrent.ExecutionException;
 @RequestMapping("/api/cart")
 public class CartController {
   @Autowired
-  private BasketService basketService;
+  private CartService cartService;
 
   @GetMapping("/{id}")
-  public ResponseEntity<Cart> getBasket(@PathVariable Integer id) throws ExecutionException, InterruptedException {
-    return ResponseEntity.ok(basketService.getBasket(id));
+  public ResponseEntity<Cart> getCart(@PathVariable Integer id) throws ExecutionException, InterruptedException {
+    return ResponseEntity.ok(cartService.getBasket(id));
   }
 
   @PostMapping("/add")
-  public void addToBasket(@RequestBody AddItems req){
-    basketService.add(req);
+  public void addToCart(@RequestBody AddItems req){
+    cartService.add(req);
   }
 
   @PutMapping("/remove")
   public void removeItem(@RequestBody AddItems req){
-    basketService.remove(req);
+    cartService.remove(req);
   }
   @DeleteMapping("/remove/item/{id}")
   public String removeItem(@PathVariable int id, @RequestParam Integer name) {
-    return basketService.removeItem(id,name);
+    return cartService.removeItem(id,name);
   }
   @DeleteMapping("/delete/{name}")
-  public String deleteBasket(@PathVariable int name) {
-    return basketService.delete(name);
+  public String deleteCart(@PathVariable int name) {
+    return cartService.delete(name);
   }
 }

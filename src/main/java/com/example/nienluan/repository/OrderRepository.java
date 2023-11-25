@@ -24,4 +24,6 @@ public interface OrderRepository extends JpaRepository<Order,Integer> {
   List<Order> findAllByStatus(OrderStatus cancel);
 
   Optional<List<Order>> findAllByUsername(String user);
+
+  List<Order> findAllByStatusAndIsPaid(OrderStatus status, boolean paid);
 }

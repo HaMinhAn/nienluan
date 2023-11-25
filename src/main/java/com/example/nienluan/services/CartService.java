@@ -1,7 +1,6 @@
 package com.example.nienluan.services;
 
 import com.example.nienluan.dto.AddItems;
-import com.example.nienluan.dto.PhoneRequest;
 import com.example.nienluan.exceptions.AppException;
 import com.example.nienluan.models.Cart;
 import com.example.nienluan.models.CartItem;
@@ -26,7 +25,7 @@ import java.util.Set;
 import java.util.concurrent.ExecutionException;
 
 @Service
-public class BasketService {
+public class CartService {
 
   @Autowired
   private CartItemRepository cartItemRepository;

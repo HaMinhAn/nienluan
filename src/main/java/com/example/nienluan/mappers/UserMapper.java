@@ -15,7 +15,6 @@ public class UserMapper {
             .username(user.getUsername())
             .id(user.getId())
             .name(user.getName())
-            .password(user.getPassword())
             .address(user.getAddress())
             .build();
     return userDto;

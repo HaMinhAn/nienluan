@@ -33,7 +33,7 @@ public class Phone {
   @Column(name = "id_Phone", nullable = false)
   private Integer id;
 
-  @Column(name = "name")
+  @Column(name = "name", columnDefinition = "nvarchar(50)")
   private String name;
 
   @Column(name = "chip")
@@ -57,8 +57,7 @@ public class Phone {
   private String description;
   @ManyToOne
   @JoinColumn(name = "id_Manufacturer")
-  @ToString.Exclude
-  @JsonBackReference
+  @JsonManagedReference
   private Manufacturer manufacturer;
 
   @OneToMany(mappedBy = "phone",fetch = FetchType.LAZY)
